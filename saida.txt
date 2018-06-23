@@ -1,0 +1,136 @@
+jessian@lab:~$ python sparksql.py
+2018-06-23 11:32:07 WARN  Utils:66 - Your hostname, lab resolves to a loopback address: 127.0.1.1; using 192.168.0.9 instead (on interface enp0s3)
+2018-06-23 11:32:07 WARN  Utils:66 - Set SPARK_LOCAL_IP if you need to bind to another address
+2018-06-23 11:32:08 WARN  NativeCodeLoader:62 - Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
++-----------------------------------------------------------------------------------------------------------------------+
+|value                                                                                                                  |
++-----------------------------------------------------------------------------------------------------------------------+
+|199.72.81.55 - - [01/Jul/1995:00:00:01 -0400] "GET /history/apollo/ HTTP/1.0" 200 6245                                 |
+|unicomp6.unicomp.net - - [01/Jul/1995:00:00:06 -0400] "GET /shuttle/countdown/ HTTP/1.0" 200 3985                      |
+|199.120.110.21 - - [01/Jul/1995:00:00:09 -0400] "GET /shuttle/missions/sts-73/mission-sts-73.html HTTP/1.0" 200 4085   |
+|burger.letters.com - - [01/Jul/1995:00:00:11 -0400] "GET /shuttle/countdown/liftoff.html HTTP/1.0" 304 0               |
+|199.120.110.21 - - [01/Jul/1995:00:00:11 -0400] "GET /shuttle/missions/sts-73/sts-73-patch-small.gif HTTP/1.0" 200 4179|
++-----------------------------------------------------------------------------------------------------------------------+
+only showing top 5 rows
+
++---------------------+-----------+-----+------------------------------------------------------------+------+------------+
+|host                 |date       |month|request                                                     |status|content_size|
++---------------------+-----------+-----+------------------------------------------------------------+------+------------+
+|199.72.81.55         |01/Jul/1995|Jul  |GET /history/apollo/ HTTP/1.0                               |200   |6245        |
+|unicomp6.unicomp.net |01/Jul/1995|Jul  |GET /shuttle/countdown/ HTTP/1.0                            |200   |3985        |
+|199.120.110.21       |01/Jul/1995|Jul  |GET /shuttle/missions/sts-73/mission-sts-73.html HTTP/1.0   |200   |4085        |
+|burger.letters.com   |01/Jul/1995|Jul  |GET /shuttle/countdown/liftoff.html HTTP/1.0                |304   |0           |
+|199.120.110.21       |01/Jul/1995|Jul  |GET /shuttle/missions/sts-73/sts-73-patch-small.gif HTTP/1.0|200   |4179        |
++---------------------+-----------+-----+------------------------------------------------------------+------+------------+
+only showing top 5 rows
+
+Hosts unicos: 137979
++--------------------------+-----+
+|host                      |count|
++--------------------------+-----+
+|picard.microsys.net       |58   |
+|ts900-418.singnet.com.sg  |17   |
+|winnie.freenet.mb.ca      |371  |
+|srtb0511a05.resnet.ubc.ca |1    |
+|alpha2.csd.uwm.edu        |192  |
++--------------------------+-----+
+only showing top 5 rows
+
++------+-------+
+|status|  count|
++------+-------+
+|   501|     41|
+|  null|      1|
+|   500|     65|
+|   400|     15|
+|   403|    225|
+|   404|  20901|
+|   200|3100522|
+|   304| 266773|
+|   302|  73070|
++------+-------+
+
++-----------+-----+-----+
+|       date|month|count|
++-----------+-----+-----+
+|01/Aug/1995|  Aug|  243|
+|03/Aug/1995|  Aug|  304|
+|04/Aug/1995|  Aug|  346|
+|05/Aug/1995|  Aug|  236|
+|06/Aug/1995|  Aug|  373|
+|07/Aug/1995|  Aug|  537|
+|08/Aug/1995|  Aug|  391|
+|09/Aug/1995|  Aug|  279|
+|10/Aug/1995|  Aug|  315|
+|11/Aug/1995|  Aug|  263|
+|12/Aug/1995|  Aug|  196|
+|13/Aug/1995|  Aug|  216|
+|14/Aug/1995|  Aug|  287|
+|15/Aug/1995|  Aug|  327|
+|16/Aug/1995|  Aug|  259|
+|17/Aug/1995|  Aug|  271|
+|18/Aug/1995|  Aug|  256|
+|19/Aug/1995|  Aug|  209|
+|20/Aug/1995|  Aug|  312|
+|21/Aug/1995|  Aug|  305|
+|22/Aug/1995|  Aug|  288|
+|23/Aug/1995|  Aug|  345|
+|24/Aug/1995|  Aug|  420|
+|25/Aug/1995|  Aug|  415|
+|26/Aug/1995|  Aug|  366|
+|27/Aug/1995|  Aug|  370|
+|28/Aug/1995|  Aug|  410|
+|29/Aug/1995|  Aug|  420|
+|30/Aug/1995|  Aug|  571|
+|31/Aug/1995|  Aug|  526|
+|01/Jul/1995|  Jul|  316|
+|02/Jul/1995|  Jul|  291|
+|03/Jul/1995|  Jul|  474|
+|04/Jul/1995|  Jul|  359|
+|05/Jul/1995|  Jul|  497|
+|06/Jul/1995|  Jul|  640|
+|07/Jul/1995|  Jul|  570|
+|08/Jul/1995|  Jul|  302|
+|09/Jul/1995|  Jul|  348|
+|10/Jul/1995|  Jul|  398|
+|11/Jul/1995|  Jul|  471|
+|12/Jul/1995|  Jul|  471|
+|13/Jul/1995|  Jul|  532|
+|14/Jul/1995|  Jul|  413|
+|15/Jul/1995|  Jul|  254|
+|16/Jul/1995|  Jul|  257|
+|17/Jul/1995|  Jul|  406|
+|18/Jul/1995|  Jul|  465|
+|19/Jul/1995|  Jul|  639|
+|20/Jul/1995|  Jul|  428|
+|21/Jul/1995|  Jul|  334|
+|22/Jul/1995|  Jul|  192|
+|23/Jul/1995|  Jul|  233|
+|24/Jul/1995|  Jul|  328|
+|25/Jul/1995|  Jul|  461|
+|26/Jul/1995|  Jul|  336|
+|27/Jul/1995|  Jul|  336|
+|28/Jul/1995|  Jul|   94|
++-----------+-----+-----+
+
++---------------------------------------------------------+-----+
+|request                                                  |count|
++---------------------------------------------------------+-----+
+|GET /pub/winvn/readme.txt HTTP/1.0                       |2004 |
+|GET /pub/winvn/release.txt HTTP/1.0                      |1732 |
+|GET /shuttle/missions/STS-69/mission-STS-69.html HTTP/1.0|682  |
+|GET /shuttle/missions/sts-68/ksc-upclose.gif HTTP/1.0    |426  |
+|GET /history/apollo/a-001/a-001-patch-small.gif HTTP/1.0 |384  |
++---------------------------------------------------------+-----+
+only showing top 5 rows
+
+Total em bytes:
++-----------+
+|      total|
++-----------+
+|65524314915|
++-----------+
+
+---> executado em 129.455887079 segundos
