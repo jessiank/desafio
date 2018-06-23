@@ -1,0 +1,147 @@
+- Questões Teóricas
+
+1. Qual​ ​o​ ​objetivo​ ​do​ ​comando​ ​​cache​ ​​em​ ​Spark ?
+
+Esse comando replica todos os dados de um RDD para a memória, 
+diminuindo o tempo de processamento pois evita acesso a disco
+
+2. O​ ​mesmo​ ​código​ ​implementado​ ​em​ ​Spark​ ​é​ ​normalmente​ ​mais​ ​rápido​ ​que​ ​a​ ​implementação​ ​equivalente​ ​em MapReduce.​ ​Por​ ​quê? 
+
+MapReduce necessariamente grava os dados processados no disco, 
+sendo que em Spark sempre tem a opção de montar a estrutura de 
+chave/valor na memória
+
+3. Qual​ ​é​ ​a​ ​função​ ​do​ ​​SparkContext​? 
+
+Preparar as configuracoes para o ambiente spark acessar os 
+dados a serem processados no cluster, atraves de um objeto 
+de sistema que recebe os parametros, tais como o nome do
+arquivo de origem dos dados e o nome do master.
+
+4. Explique​ ​com​ ​suas​ ​palavras​ ​​ ​o​ ​que​ ​é​ ​​Resilient​ ​Distributed​ ​Datasets​​ ​(RDD). 
+
+São estruturas que utilizam regras padronizadas de montagem e 
+armazenamento dos dados para leitura, possibilitando por exemplo 
+divisão em partições e em diferentes hosts na infraestrutura de 
+rede, de onde vem a qualificação "dados distribuídos" em inglês.
+
+Utilizados posteriormente como fonte de informação em rotinas de 
+processamento e jamais modificados, mas podendo ser replicados 
+com ou sem modificação, qualidade essa que também está presente 
+no nome da tecnologia - "resiliente".
+
+5. GroupByKey​ ​​é​ ​menos​ ​eficiente​ ​que​ ​​reduceByKey​ ​​em​ ​grandes​ ​dataset.​ ​Por​ ​quê? 
+
+Em grandes datasets, geralmente os dados ficam particionados na infraestrutura.
+Sendo assim, no caso de GroupByKey, os dados sao trazidos sem qualquer tipo
+de pre-processamento para serem utilizados na rotina Spark. Isso faz com
+que haja um tempo a mais de transmissao dos dados pela rede devido a maior
+quantidade de informacao a ser trafegada. No caso de usar ReduceByKey, os dados 
+sao pre-agrupados pela infraestrutura Spark em cada particao antes de serem 
+copiados para a o restante da rotina Spark, diminuindo o tempo de transmissao 
+e processamento.
+
+- Código em Scala
+
+Explique​ ​o​ ​que​ ​o​ ​código​ ​Scala​ ​abaixo​ ​faz. 
+
+val​​ ​​textFile​​ ​​=​​ ​​sc​.​textFile​(​"hdfs://..."​) 
+val​​ ​​counts​​ ​​=​​ ​​textFile​.​flatMap​(​line​​ ​​=>​​ ​​line​.​split​(​"​ ​"​))
+ ​ ​​ ​​ ​​ ​​ ​​ ​​ ​​ ​​ ​​ ​​ ​​ ​​ ​​ ​​ ​​ ​​ ​​.​map​(​word​​ ​​=>​​ ​​(​word​,​​ ​​1​))
+ ​ ​​ ​​ ​​ ​​ ​​ ​​ ​​ ​​ ​​ ​​ ​​ ​​ ​​ ​​ ​​ ​​ ​​.​reduceByKey​(​_​​ ​​+​​ ​​_​) 
+counts​.​saveAsTextFile​(​"hdfs://..."​) 
+
+Primeiro, esse código transforma um arquivo armazenado em um sistema 
+de arquivos HDFS (Hadoop) e converte em um RDD (textFile).
+
+Em seguida, processa as palavras do texto, monta uma "tabela" com duas 
+colunas e em seguida "reduz" essa tabela, somando os valores da segunda 
+coluna para cada palavra, ou seja, contando as ocorrencias de cada uma 
+delas, armazenando o resultado em um outro RDD (counts).
+
+Finalmente, grava o RDD em um arquivo texto no HDFS.
+
+- Dados do website da NASA
+
+1. Número​ ​de​ ​hosts​ ​únicos. 
+
+137979
+
+2. O​ ​total​ ​de​ ​erros​ ​404. 
+
+20901
+
+3. Os​ ​5​ ​URLs​ ​que​ ​mais​ ​causaram​ ​erro​ ​404.
+
+(lista das URLs com a respectiva quantidade de erros)
+
+/pub/winvn/readme.txt 2004
+/pub/winvn/release.txt 1732
+/shuttle/missions/STS-69/mission-STS-69.html 682
+/shuttle/missions/sts-68/ksc-upclose.gif 426
+/history/apollo/a-001/a-001-patch-small.gif 384
+
+4. Quantidade​ ​de​ ​erros​ ​404​ ​por​ ​dia. 
+
+{'Aug': {'01/Aug/1995': 243,
+         '03/Aug/1995': 304,
+         '04/Aug/1995': 346,
+         '05/Aug/1995': 236,
+         '06/Aug/1995': 373,
+         '07/Aug/1995': 537,
+         '08/Aug/1995': 391,
+         '09/Aug/1995': 279,
+         '10/Aug/1995': 315,
+         '11/Aug/1995': 263,
+         '12/Aug/1995': 196,
+         '13/Aug/1995': 216,
+         '14/Aug/1995': 287,
+         '15/Aug/1995': 327,
+         '16/Aug/1995': 259,
+         '17/Aug/1995': 271,
+         '18/Aug/1995': 256,
+         '19/Aug/1995': 209,
+         '20/Aug/1995': 312,
+         '21/Aug/1995': 305,
+         '22/Aug/1995': 288,
+         '23/Aug/1995': 345,
+         '24/Aug/1995': 420,
+         '25/Aug/1995': 415,
+         '26/Aug/1995': 366,
+         '27/Aug/1995': 370,
+         '28/Aug/1995': 410,
+         '29/Aug/1995': 420,
+         '30/Aug/1995': 571,
+         '31/Aug/1995': 526},
+ 'Jul': {'01/Jul/1995': 316,
+         '02/Jul/1995': 291,
+         '03/Jul/1995': 474,
+         '04/Jul/1995': 359,
+         '05/Jul/1995': 497,
+         '06/Jul/1995': 640,
+         '07/Jul/1995': 570,
+         '08/Jul/1995': 302,
+         '09/Jul/1995': 348,
+         '10/Jul/1995': 398,
+         '11/Jul/1995': 471,
+         '12/Jul/1995': 471,
+         '13/Jul/1995': 532,
+         '14/Jul/1995': 413,
+         '15/Jul/1995': 254,
+         '16/Jul/1995': 257,
+         '17/Jul/1995': 406,
+         '18/Jul/1995': 465,
+         '19/Jul/1995': 639,
+         '20/Jul/1995': 428,
+         '21/Jul/1995': 334,
+         '22/Jul/1995': 192,
+         '23/Jul/1995': 233,
+         '24/Jul/1995': 328,
+         '25/Jul/1995': 461,
+         '26/Jul/1995': 336,
+         '27/Jul/1995': 336,
+         '28/Jul/1995': 94}}
+ 
+5. O​ ​total​ ​de​ ​bytes​ ​retornados. 
+
+65524314915 (65,5 GB)
